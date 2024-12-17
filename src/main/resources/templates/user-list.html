@@ -65,13 +65,14 @@
 <div class="container">
     <h1>User List</h1>
     <a th:href="@{/admin/users/add}" class="btn">Add User</a>
-    <a th:href="@{/profile}" class="btn btn-back">Back to Library</a>
+    <a th:href="@{/profile}" class="btn btn-back">Back to Profile</a>
     <table>
         <thead>
         <tr>
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Bithday</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -80,6 +81,7 @@
             <td th:text="${user.username}"></td>
             <td th:text="${user.email}"></td>
             <td th:text="${user.role}"></td>
+            <td th:text="${user.birthday}"></td>
             <td>
                 <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn">Edit</a>
                 <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" class="btn"

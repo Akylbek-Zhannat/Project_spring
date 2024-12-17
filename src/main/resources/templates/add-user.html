@@ -88,11 +88,14 @@
         <label for="role">Role:</label>
         <input type="text" id="role" name="role" placeholder="USER or ADMIN" required>
 
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" required>
+
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
 
         <button type="submit">Add User</button>
-        <a th:href="@{/profile}" class="btn btn-back">Back to Library</a>
+        <a th:href="@{/profile}" class="btn btn-back">Back to Profile</a>
     </form>
 </div>
 </body>

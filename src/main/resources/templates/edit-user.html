@@ -88,11 +88,14 @@
         <label for="role">Role:</label>
         <input type="text" id="role" name="role" th:value="${user.role}" required>
 
+        <label for="birthday" class="form-label">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" class="form-control" th:value="${user.birthday}">
+
         <label for="password">New Password:</label>
         <input type="password" id="password" name="newPassword">
 
         <button type="submit">Save Changes</button>
-        <a th:href="@{/profile}" class="btn btn-back">Back to Library</a>
+        <a th:href="@{/profile}" class="btn btn-back">Back to Profile</a>
     </form>
 </div>
 </body>

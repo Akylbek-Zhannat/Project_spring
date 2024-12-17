@@ -30,7 +30,7 @@ public class BookController {
     public String viewBookDetails(@PathVariable("id") String id, Model model, Principal principal) {
         Book book = bookService.getBookById(id);
         if (book == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Film not found");
         }
         String username = principal.getName();
         boolean isFavorite = bookService.isBookInFavorites(username, id);
@@ -44,10 +44,10 @@ public class BookController {
         String username = principal.getName();
         if (bookService.isBookInFavorites(username, id)) {
             bookService.removeBookFromFavorites(username, id);
-            redirectAttributes.addFlashAttribute("message", "Book removed from favorites.");
+            redirectAttributes.addFlashAttribute("message", "Film removed from favorites.");
         } else {
             bookService.addBookToFavorites(username, id);
-            redirectAttributes.addFlashAttribute("message", "Book added to favorites!");
+            redirectAttributes.addFlashAttribute("message", "Film added to favorites!");
         }
         return "redirect:/books/{id}";
     }
@@ -63,9 +63,9 @@ public class BookController {
             String currentUserEmail = "akylbekzhannat65@gmail.com";
             emailService.sendBookingConfirmation(currentUserEmail, book.getTitle(), reserveDateTime);
             redirectAttributes.addFlashAttribute("message",
-                    "Book reserved successfully for " + reserveDateTime + " and confirmation email sent!");
+                    "Film reserved successfully for " + reserveDateTime + " and confirmation email sent!");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Failed to reserve book: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("error", "Failed to reserve film: " + e.getMessage());
         }
         return "redirect:/books/{id}";
     }

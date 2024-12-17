@@ -26,12 +26,6 @@ public class LibraryController {
         this.fileStorageService = fileStorageService;
     }
 
-    @GetMapping("/test")
-    @ResponseBody
-    public List<Book> testBooks() {
-        return bookService.getAllBooks();
-    }
-
 
     @GetMapping
     public String viewHomePage(

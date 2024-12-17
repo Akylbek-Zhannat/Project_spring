@@ -50,9 +50,9 @@ public class BookServiceImpl implements BookService {
         if (book != null) {
             book.setReservedDate(reserveDateTime);
             bookRepository.save(book);
-            System.out.println("Book reserved for date and time: " + reserveDateTime);
+            System.out.println("Film reserved for date and time: " + reserveDateTime);
         } else {
-            throw new RuntimeException("Book not found");
+            throw new RuntimeException("Film not found");
         }
     }
 

@@ -60,8 +60,10 @@
   <h1>Admin Profile</h1>
   <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
   <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+  <p><strong>Birthday:</strong> <span th:text="${user.birthday}"></span></p>
+  <a th:href="@{/profile/edit}" class="btn">Edit Profile</a>
   <a href="/admin/users" class="btn">View All Users</a>
-  <a th:href="@{/}" class="btn btn-back">Back to Library</a>
+  <a th:href="@{/}" class="btn btn-back">Back to Movies</a>
 </div>
 </body>
 </html>

@@ -1,11 +1,10 @@
 package com.example.project;
 
-import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Document(collection = "user")
@@ -15,10 +14,11 @@ public class User {
     private String id;
     private String username;
     private String password;
-//    private String profilePicture;
     private String role;
     private String email;
     private LocalDate birthday;
+    private List<String> favorites = new ArrayList<>();
+
     public User(){}
     public User(String id, String username, String password, String role, String email, LocalDate birthday) {
         this.id = id;
@@ -61,13 +61,7 @@ public class User {
         this.password = password;
     }
 
-//    public String getProfilePicture() {
-//        return profilePicture;
-//    }
-//
-//    public void setProfilePicture(String profilePicture) {
-//        this.profilePicture = profilePicture;
-//    }
+
 
     public String getRole() {
         return role;
@@ -83,6 +77,19 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public List<String> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<String> favorites) {
+        this.favorites = favorites;
+    }
+
+    public void addFavorite(String bookId) {
+        if (!favorites.contains(bookId)) {
+            favorites.add(bookId);
+        }
     }
 }
 

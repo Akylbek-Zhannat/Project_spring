@@ -3,33 +3,47 @@
 <head>
   <title>Register</title>
   <style>
-    /* Общие стили для страницы */
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
       margin: 0;
       padding: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      background: url('/images/login_page.jpg') no-repeat center center/cover;
+      position: relative;
     }
 
-    /* Контейнер формы */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
     .register-container {
-      background-color: #fff;
-      padding: 20px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       width: 100%;
       max-width: 400px;
     }
 
     h1 {
       text-align: center;
-      color: #333;
+      color: #fff;
       margin-bottom: 20px;
-      font-size: 24px;
+      font-size: 28px;
+      font-weight: bold;
     }
 
     form {
@@ -39,7 +53,7 @@
 
     label {
       margin-bottom: 8px;
-      color: #555;
+      color: #ddd;
       font-weight: bold;
     }
 
@@ -48,12 +62,25 @@
     input[type="email"],
     input[type="date"],
     input[type="file"] {
-      padding: 10px;
+      padding: 12px;
       margin-bottom: 15px;
-      border: 1px solid #ccc;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 5px;
+      color: #333;
       font-size: 14px;
-      width: 100%;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="email"]:focus,
+    input[type="date"]:focus,
+    input[type="file"]:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      background: rgba(255, 255, 255, 0.8);
     }
 
     button {
@@ -64,41 +91,27 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
       background-color: #0056b3;
     }
 
-    /* Ссылки или дополнительный текст */
     p {
       text-align: center;
       margin-top: 15px;
-      color: #555;
+      color: #fff;
     }
 
     p a {
       color: #007bff;
       text-decoration: none;
+      font-weight: bold;
     }
 
     p a:hover {
       text-decoration: underline;
-    }
-
-    /* Адаптивность */
-    @media (max-width: 600px) {
-      .register-container {
-        padding: 15px;
-      }
-
-      h1 {
-        font-size: 20px;
-      }
-
-      button {
-        font-size: 14px;
-      }
     }
   </style>
 </head>
@@ -108,17 +121,23 @@
   <form method="post" action="/register" enctype="multipart/form-data">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
+
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
+
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
+
     <label for="birthday">Birthday:</label>
     <input type="date" id="birthday" name="birthday">
-<!--    <label for="profilePicture">Profile Picture:</label>-->
-<!--    <input type="file" id="profilePicture" name="profilePicture">-->
+
+
     <button type="submit">Register</button>
   </form>
   <p>Already have an account? <a th:href="@{/login}">Login here</a></p>
 </div>
 </body>
 </html>
+
+
+

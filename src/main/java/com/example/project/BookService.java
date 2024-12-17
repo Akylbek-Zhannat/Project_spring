@@ -8,4 +8,9 @@ public interface BookService {
     Book createBook(Book book);
     Book updateBook(String id, Book book);
     void deleteBook(String id);
+    boolean isBookInFavorites(String username, String bookId);
+    void addBookToFavorites(String username, String bookId);
+    void removeBookFromFavorites(String username, String bookId);
+    void reserveBook(String bookId, String reserveDateTime);
+
 }

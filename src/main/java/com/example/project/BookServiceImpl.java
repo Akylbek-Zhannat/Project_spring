@@ -1,25 +1,29 @@
 package com.example.project;
-import org.springframework.stereotype.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
     @Override
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public Book getBookById(String id) {
+        return bookRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Book getBookById(String id) {
-        return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
     }
 
     @Override
@@ -29,18 +33,52 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book updateBook(String id, Book book) {
-        Book existingBook = getBookById(id);
-        existingBook.setTitle(book.getTitle());
-        existingBook.setAuthor(book.getAuthor());
-        existingBook.setIsbn(book.getIsbn());
-        existingBook.setPrice(book.getPrice());
-        existingBook.setCoverImageUrl(book.getCoverImageUrl());
-        existingBook.setCategory(book.getCategory());
-        return bookRepository.save(existingBook);
+        book.setId(id); // Установите ID для обновления
+        return bookRepository.save(book);
     }
 
     @Override
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
     }
+
+
+
+    @Override
+    public void reserveBook(String bookId, String reserveDateTime) {
+        Book book = getBookById(bookId);
+        if (book != null) {
+            book.setReservedDate(reserveDateTime);
+            bookRepository.save(book);
+            System.out.println("Book reserved for date and time: " + reserveDateTime);
+        } else {
+            throw new RuntimeException("Book not found");
+        }
+    }
+
+    @Override
+    public boolean isBookInFavorites(String username, String bookId) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getFavorites().contains(bookId);
+    }
+
+    @Override
+    public void addBookToFavorites(String username, String bookId) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (!user.getFavorites().contains(bookId)) {
+            user.getFavorites().add(bookId);
+            userRepository.save(user);
+        }
+    }
+
+    @Override
+    public void removeBookFromFavorites(String username, String bookId) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.getFavorites().remove(bookId);
+        userRepository.save(user);
+    }
+
 }

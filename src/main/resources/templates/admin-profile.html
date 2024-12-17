@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>User Profile</title>
+  <title>Admin Profile</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -34,40 +34,34 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       width: 100%;
       max-width: 400px;
-      text-align: center;
     }
     h1, p {
       color: #fff;
       text-align: center;
     }
     .btn {
-      display: inline-block;
-      margin-top: 20px;
+      display: block;
+      margin: 20px auto;
       padding: 10px 20px;
+      background-color: #007bff;
       color: #fff;
+      text-align: center;
       text-decoration: none;
-      background-color: rgba(255, 255, 255, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 5px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      font-size: 16px;
       font-weight: bold;
     }
     .btn:hover {
-      background-color: rgba(255, 255, 255, 0.5);
-      color: #333;
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
 <div class="profile-container">
-  <h1>User Profile</h1>
+  <h1>Admin Profile</h1>
   <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
   <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
-  <p><strong>Birthday:</strong> <span th:text="${user.birthday}"></span></p>
-  <a th:href="@{/profile/edit}" class="btn">Edit Profile</a>
+  <a href="/admin/users" class="btn">View All Users</a>
   <a th:href="@{/}" class="btn btn-back">Back to Library</a>
 </div>
 </body>
 </html>
-

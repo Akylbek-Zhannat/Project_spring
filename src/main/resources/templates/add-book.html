@@ -3,26 +3,107 @@
 <head>
   <title>Add Book</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('/images/main2.jpeg') no-repeat center center/cover;
+      position: relative;
+      color: #fff;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      color: #333;
+      font-weight: bold;
+    }
+
+    .form-control, .form-select {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .btn {
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-back {
+      background-color: #6c757d;
+      color: #fff;
+    }
+
+    .btn-back:hover {
+      background-color: #5a6268;
+    }
+  </style>
 </head>
 <body>
-<div class="container mt-4">
+<div class="container">
   <h1>Add New Book</h1>
   <form method="post" action="/books/save" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="title" class="form-label">Title:</label>
-      <input type="text" id="title" name="title" class="form-control">
+      <input type="text" id="title" name="title" class="form-control" required>
     </div>
     <div class="mb-3">
       <label for="author" class="form-label">Author:</label>
-      <input type="text" id="author" name="author" class="form-control">
+      <input type="text" id="author" name="author" class="form-control" required>
     </div>
     <div class="mb-3">
       <label for="price" class="form-label">Price:</label>
-      <input type="number" id="price" name="price" step="0.01" class="form-control">
+      <input type="number" id="price" name="price" step="0.01" class="form-control" required>
     </div>
     <div class="mb-3">
       <label for="category" class="form-label">Category:</label>
-      <select id="category" name="category.id" class="form-select">
+      <select id="category" name="category.id" class="form-select" required>
         <option th:each="category : ${categories}"
                 th:value="${category.id}"
                 th:text="${category.name}">
@@ -33,7 +114,10 @@
       <label for="image" class="form-label">Upload Cover Image:</label>
       <input type="file" id="image" name="image" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a th:href="@{/}" class="btn btn-back">Back to Library</a>
+    </div>
   </form>
 </div>
 </body>

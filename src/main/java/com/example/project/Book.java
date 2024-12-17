@@ -15,12 +15,14 @@ public class Book {
     private String author;
     private String isbn;
     private double price;
-    private String coverImageUrl; // Ссылка на изображение обложки книги
+    private String coverImageUrl;
+    private String reservedDate;
+    private boolean favorite;
 
     @DBRef
     private Category category;
     public Book(){}
-    public Book(String id, String title, String author, String isbn, double price, String coverImageUrl, Category category) {
+    public Book(String id, String title, String author, String isbn, double price, String coverImageUrl, Category category, String reservedDate,boolean favorite) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -28,6 +30,8 @@ public class Book {
         this.price = price;
         this.coverImageUrl = coverImageUrl;
         this.category = category;
+        this.reservedDate =reservedDate;
+        this.favorite = favorite;
     }
 
     public String getId() {
@@ -53,7 +57,13 @@ public class Book {
     public void setAuthor(String author) {
         this.author = author;
     }
+    public String getReservedDate() {
+        return reservedDate;
+    }
 
+    public void setReservedDate(String reservedDate) {
+        this.reservedDate = reservedDate;
+    }
     public String getIsbn() {
         return isbn;
     }
@@ -85,4 +95,12 @@ public class Book {
     public void setCategory(Category category) {
         this.category = category;
     }
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
 }
